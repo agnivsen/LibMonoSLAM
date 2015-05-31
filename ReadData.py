@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import Parameters as param
 
 
 class ReadData:
@@ -20,6 +21,6 @@ class ReadData:
             else:
                 val+=1
   
-  
+   
   
  

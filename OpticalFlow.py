@@ -2,14 +2,15 @@
 
 """
 Implements Corner Detection and Optical Flow tracking using LK method.
-All image processing uses OpenCV
+Image processing using OpenCV
 
 """
 
 import cv2
 #import cv
 import numpy as np
-from matplotlib import pyplot as plt
+import Parameters as param
+
 
 class OpticalFlow:
 
@@ -19,7 +20,8 @@ class OpticalFlow:
     prevFeatures = np.zeros((10,2));
 
     def __init__(self, firstImage, secondImage, uiStatus):
-        print firstImage
+        if (param.DEBUG==1):
+            print firstImage
         self.firstImage = firstImage;
         self.secondImage = secondImage;
         self.uiStatus = uiStatus
@@ -36,7 +38,7 @@ class OpticalFlow:
         
                             
         
-        #img = cv2.imread('D:\\Documents\\Data\\MonoSlam\\TranslationalData\\TestStereo\\1305031108.611407.png')
+        #img = cv2.imread('D:\\Documents\\Data\\MSL\\TranslationalData\\TestStereo\\1305031108.611407.png')
         img = cv2.imread(self.firstImage)
         gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
         
@@ -46,7 +48,7 @@ class OpticalFlow:
         # Create a mask image for drawing purposes
         mask = np.zeros_like(img)
         
-        #new_img = cv2.imread('D:\\Documents\\Data\\MonoSlam\\TranslationalData\\TestStereo\\1305031108.643303.png')
+        #new_img = cv2.imread('D:\\Documents\\Data\\MSL\\TranslationalData\\TestStereo\\1305031108.643303.png')
         new_img = cv2.imread(self.secondImage)
         new_gray = cv2.cvtColor(new_img,cv2.COLOR_BGR2GRAY)
         
@@ -57,27 +59,24 @@ class OpticalFlow:
         good_new = p1[st==1]
         good_old = corners[st==1]
             
-            
         counter = 0
-        #print "{"
         
-        features = [[0]*10 for i in range(10)]
+        #features = [[0]*10 for i in range(10)]
+        features = np.zeros((10,2));
         
          # draw the tracks
         for i,(new,old) in enumerate(zip(good_new,good_old)):
             counter+=1
             a,b = new.ravel()
             c,d = old.ravel()
-            #print "{ %d, %d}," % (c,  d)
-            #print "{ %d, %d},\n" % (a, b)
-            features[i][0] = a
-            features[i][1] = b
-            self.prevFeatures[i][0] = c
-            self.prevFeatures[i][1] = d
+            
+            features[i][0] = int(round(a))
+            features[i][1] = int(round(b))
+            self.prevFeatures[i][0] = int(round(c))
+            self.prevFeatures[i][1] = int(round(d))
             cv2.line(mask, (a,b),(c,d), color[i].tolist(), 2)
             cv2.circle(new_img,(a,b),5,color[i].tolist(),-1)
         final = cv2.add(new_img,mask)
-        #print "}\n\n"
         
         if(self.uiStatus > 0):
             cv2.imshow('frame',final)
