@@ -40,3 +40,17 @@ Download the code and open it up in Spyder (or anything else). Fire up the *Driv
 * To view existing bugs, please check the [Bug Tracker](https://docs.google.com/spreadsheets/d/1vhENzZWOP2QLKMHWm5zqbSzBfq6mTCorqYr-PZuy8W4/edit?usp=sharing)
 
 
+******
+
+## Dataset
+
+This application is based on an extensive, offline dataset, created and maintained by [Technische Universität München (TUM)](https://www.tum.de/). The dataset contains hours of video captured by a depth-mapping camera. The dataset provides us with image sequence, as well as depth maps and unit quaternions describing the position and orientation of the camera w.r.t the world coordinates. 
+
+[Link to RGB-D SLAM dataset](http://vision.in.tum.de/data/datasets/rgbd-dataset/download#)
+
+Here, we use the image sequence to perform offline MonoSLAM and use the depth map + unit quaternion as ground truth for validating our algorithm.
+
+We use the *Sequence 'freiburg3_long_office_household' dataset*, which has been captured using an Asus Xtion motion sensor.
+
+
+
