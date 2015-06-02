@@ -52,5 +52,14 @@ Here, we use the image sequence to perform offline MonoSLAM and use the depth ma
 
 We use the *Sequence 'freiburg3_long_office_household' dataset*, which has been captured using an Asus Xtion motion sensor.
 
+### How to link the dataset with the source code:
+
+After downloading the Sequence 'freiburg3_long_office_household' dataset from TUM's website, the following changes must be done to the source code:
+
+* Open the Parameters.py file and set the value of the *PATH* variable to the folder containing the RGB images from the TUM dataset
+
+* In the same Parameters.py file, set the *GROUND_TRUTH_FILE* variable to the text file containing the ground truth trajectory (this is required, as of now, since the SFM module have not been implemented yet)
+
+
 
 
